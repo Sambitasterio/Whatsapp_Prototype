@@ -120,31 +120,6 @@
   .screen { display: none; height: 100%; }
   .screen.active { display: flex; flex-direction: column; }
 
-  .screen-placeholder {
-    margin: auto;
-    text-align: center;
-    color: var(--wa-text-dark);
-  }
-
-  .screen-placeholder .tag {
-    display: inline-block;
-    background: white;
-    border: 1px dashed #c9c9c9;
-    border-radius: 12px;
-    padding: 16px 20px;
-    max-width: 280px;
-  }
-
-  .screen-placeholder .step-name {
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-
-  .screen-placeholder .step-desc {
-    font-size: 13px;
-    color: var(--wa-text-muted);
-  }
-
   .nav-buttons {
     display: flex;
     justify-content: space-between;
@@ -570,12 +545,156 @@
     padding: 5px 10px;
     border-radius: 20px;
   }
+
+  /* ---- Phase 4: resolution + Family Center (S7-S9) ---- */
+
+  .resolved-banner {
+    background: #eafaf0;
+    border: 1px solid #cdeedb;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: #0d7a45;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .fc-header-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: white;
+    color: var(--wa-header-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .fc-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+
+  .fc-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--wa-text-dark);
+    margin-bottom: 12px;
+  }
+
+  .fc-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .fc-status-badge {
+    background: #eafaf0;
+    color: #0d7a45;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .fc-review-btn {
+    background: transparent;
+    border: 1px solid var(--wa-divider);
+    color: var(--wa-header-teal);
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .fc-pending-metric {
+    font-size: 11.5px;
+    color: var(--wa-text-muted);
+    background: var(--wa-bg);
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-bottom: 4px;
+  }
+
+  .fc-pending-metric strong { color: var(--wa-text-dark); }
+
+  .fc-divider { border-top: 1px solid var(--wa-divider); margin: 14px 0; }
+
+  .fc-toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 13px;
+    color: var(--wa-text-dark);
+  }
+
+  .fc-toggle-sub {
+    font-size: 11px;
+    color: var(--wa-text-muted);
+    margin-top: 2px;
+  }
+
+  .toggle-pill {
+    width: 40px;
+    height: 22px;
+    border-radius: 20px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .toggle-pill.on { background: var(--wa-accent-green); }
+  .toggle-pill.off-locked { background: #d9dde0; }
+
+  .toggle-pill .knob {
+    position: absolute;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: white;
+  }
+
+  .toggle-pill.on .knob { right: 2px; }
+  .toggle-pill.off-locked .knob { left: 2px; }
+
+  .fc-locked-note {
+    font-size: 10.5px;
+    color: #b8860b;
+    margin-top: -6px;
+    margin-bottom: 4px;
+  }
+
+  .fc-rights-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: white;
+    border: 1px solid var(--wa-divider);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12.5px;
+    color: var(--wa-text-dark);
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+
+  .fc-rights-btn:last-child { margin-bottom: 0; }
 </style>
 </head>
 <body>
 
   <div class="stage">
-    <div class="stage-label">Phase 1 — 9-screen skeleton + navigation (placeholder content only; real screen content arrives in Phases 2–4)</div>
+    <div class="stage-label">Phases 0–4 complete — all 9 screens live. Visual polish pass in Phase 5.</div>
 
     <div class="proto-map" id="protoMap"></div>
 
@@ -774,10 +893,34 @@
 
         <!-- S7 -->
         <div class="screen" id="s7" data-label="S7 — Minor's chat list (resolved)">
-          <div class="screen-placeholder">
-            <div class="tag">
-              <div class="step-name">S7 — Minor's chat list, resolved</div>
-              <div class="step-desc">Content arrives Phase 4.</div>
+          <div>
+            <div class="search-bar">🔍 Search</div>
+
+            <div class="chat-row pinned-row">
+              <div class="avatar-circle system">W</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">WhatsApp <span class="verified-badge">✓</span></div>
+                <div class="chat-preview">Approved ✅ · Contact sync: On · Ads: Never for under-18</div>
+              </div>
+              <div class="chat-time">now</div>
+            </div>
+
+            <div class="chat-row">
+              <div class="avatar-circle school">10B</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">Class 10B 📚</div>
+                <div class="chat-preview">Ms. Rao: Homework for tomorrow is...</div>
+              </div>
+              <div class="chat-time">9:41</div>
+            </div>
+
+            <div class="chat-row">
+              <div class="avatar-circle friend">A</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">Aryan</div>
+                <div class="chat-preview">See you at practice!</div>
+              </div>
+              <div class="chat-time">Yesterday</div>
             </div>
           </div>
           <div class="nav-buttons">
@@ -788,10 +931,35 @@
 
         <!-- S8 -->
         <div class="screen" id="s8" data-label="S8 — Minor's chat list (post-consent)">
-          <div class="screen-placeholder">
-            <div class="tag">
-              <div class="step-name">S8 — Minor's normal chat list, post-consent</div>
-              <div class="step-desc">Content arrives Phase 4.</div>
+          <div>
+            <div class="resolved-banner">✅ Kabir's account is fully set up — no restrictions, nothing pending.</div>
+            <div class="search-bar">🔍 Search</div>
+
+            <div class="chat-row">
+              <div class="avatar-circle school">10B</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">Class 10B 📚</div>
+                <div class="chat-preview">Ms. Rao: Homework for tomorrow is...</div>
+              </div>
+              <div class="chat-time">9:41</div>
+            </div>
+
+            <div class="chat-row">
+              <div class="avatar-circle friend">A</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">Aryan</div>
+                <div class="chat-preview">See you at practice!</div>
+              </div>
+              <div class="chat-time">Yesterday</div>
+            </div>
+
+            <div class="chat-row">
+              <div class="avatar-circle group2">BC</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">Cricket Squad 🏏</div>
+                <div class="chat-preview">Rohan: match postponed to Sat</div>
+              </div>
+              <div class="chat-time">Sun</div>
             </div>
           </div>
           <div class="nav-buttons">
@@ -802,10 +970,33 @@
 
         <!-- S9 -->
         <div class="screen" id="s9" data-label="S9 — [Parent device] Family Center">
-          <div class="screen-placeholder">
-            <div class="tag">
-              <div class="step-name">S9 — [Parent's phone] Family Center hub</div>
-              <div class="step-desc">Terminal screen. Content arrives Phase 4.</div>
+          <div>
+            <div class="fc-card">
+              <div class="fc-card-title"><span class="fc-header-icon">👪</span>Family Center — Kabir's account</div>
+
+              <div class="fc-status-row">
+                <span class="fc-status-badge">✅ Approved · Valid</span>
+                <button class="fc-review-btn">Review again</button>
+              </div>
+              <div class="fc-pending-metric">Time in pending state before approval: <strong>6 hours</strong> — healthy (guardrail target: flag if any account exceeds 30 days)</div>
+
+              <div class="fc-divider"></div>
+
+              <div class="fc-toggle-row">
+                <div>Contact sync<div class="fc-toggle-sub">Lets Kabir find friends already on WhatsApp</div></div>
+                <div class="toggle-pill on"><div class="knob"></div></div>
+              </div>
+              <div class="fc-toggle-row">
+                <div>Ad personalization<div class="fc-toggle-sub">Locked off — DPDP bans this for under-18 accounts, even with consent</div></div>
+                <div class="toggle-pill off-locked"><div class="knob"></div></div>
+              </div>
+            </div>
+
+            <div class="fc-card">
+              <div class="fc-card-title">Data rights</div>
+              <button class="fc-rights-btn">📄 View Kabir's data</button>
+              <button class="fc-rights-btn">✏️ Correct date of birth</button>
+              <button class="fc-rights-btn">🗑️ Delete contact-sync data</button>
             </div>
           </div>
           <div class="nav-buttons">
