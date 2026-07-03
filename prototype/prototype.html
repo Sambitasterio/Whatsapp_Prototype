@@ -422,6 +422,154 @@
     font-size: 13px;
     cursor: pointer;
   }
+
+  /* ---- Phase 3: device-switch + parent consent (S5-S6) ---- */
+
+  .device-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #ffffff14;
+    border: 1px solid #ffffff26;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12.5px;
+    color: #ffffffcc;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+
+  .device-indicator.parent-view {
+    background: #25d36622;
+    border-color: #25d36655;
+    color: #b7f5cf;
+  }
+
+  .chat-row .avatar-circle.kid { background: #e85d75; }
+  .chat-row .avatar-circle.group2 { background: #7c6bff; }
+
+  .unread-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--wa-accent-green);
+    flex-shrink: 0;
+  }
+
+  /* consent card (S5) */
+  .consent-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: left;
+  }
+
+  .consent-card .card-heading {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--wa-text-dark);
+    margin-bottom: 12px;
+    line-height: 1.35;
+  }
+
+  .consent-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-size: 12.5px;
+  }
+
+  .consent-table th {
+    text-align: left;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--wa-text-muted);
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--wa-divider);
+  }
+
+  .consent-table td {
+    padding: 8px 4px;
+    border-bottom: 1px solid var(--wa-divider);
+    vertical-align: top;
+    color: var(--wa-text-dark);
+    line-height: 1.35;
+  }
+
+  .consent-table tr:last-child td { border-bottom: none; }
+
+  .consent-table .denied { color: #c0392b; font-weight: 600; }
+
+  .card-buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+  .card-buttons button {
+    flex: 1;
+    padding: 11px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .card-buttons .approve-btn {
+    background: var(--wa-accent-green);
+    color: #04210f;
+    border: none;
+  }
+
+  .card-buttons .notnow-btn {
+    background: transparent;
+    color: var(--wa-text-muted);
+    border: 1px solid var(--wa-divider);
+  }
+
+  /* confirmed state (S6) */
+  .confirmed-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .confirmed-card .check {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+
+  .confirmed-card .confirm-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--wa-text-dark);
+    margin-bottom: 6px;
+  }
+
+  .confirmed-card .confirm-sub {
+    font-size: 12.5px;
+    color: var(--wa-text-muted);
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+
+  .confirm-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .confirm-chip {
+    background: #eafaf0;
+    color: #0d7a45;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 20px;
+  }
 </style>
 </head>
 <body>
@@ -430,6 +578,8 @@
     <div class="stage-label">Phase 1 — 9-screen skeleton + navigation (placeholder content only; real screen content arrives in Phases 2–4)</div>
 
     <div class="proto-map" id="protoMap"></div>
+
+    <div class="device-indicator" id="deviceIndicator">📱 Viewing: Kabir's phone</div>
 
     <div class="phone-frame">
       <div class="wa-header">
@@ -544,28 +694,80 @@
 
         <!-- S5 -->
         <div class="screen" id="s5" data-label="S5 — [Parent device] Consent card">
-          <div class="screen-placeholder">
-            <div class="tag">
-              <div class="step-name">S5 — [Parent's phone] Consent request card</div>
-              <div class="step-desc">Device-switch mechanic + consent card arrive Phase 3.</div>
+          <div id="s5-list">
+            <div class="search-bar">🔍 Search</div>
+
+            <div class="chat-row pinned-row clickable" onclick="openParentThread()">
+              <div class="avatar-circle system">W</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">WhatsApp <span class="verified-badge">✓</span></div>
+                <div class="chat-preview">Kabir wants to use WhatsApp — review needed</div>
+              </div>
+              <div class="chat-time"><span class="unread-dot"></span></div>
+            </div>
+
+            <div class="chat-row">
+              <div class="avatar-circle kid">K</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">Kabir ❤️</div>
+                <div class="chat-preview">okay mum, home by 6</div>
+              </div>
+              <div class="chat-time">2:15</div>
+            </div>
+
+            <div class="chat-row">
+              <div class="avatar-circle group2">BC</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">Building Committee</div>
+                <div class="chat-preview">Reminder: society meeting Sunday</div>
+              </div>
+              <div class="chat-time">Mon</div>
             </div>
           </div>
-          <div class="nav-buttons">
-            <button class="secondary" onclick="showScreen('s4')">Back</button>
-            <button onclick="showScreen('s6')">Approve</button>
+
+          <div id="s5-card" style="display:none; flex-direction:column; height:100%;">
+            <div class="thread-back" onclick="closeParentThread()">‹ Back to chats</div>
+            <div class="consent-card" style="margin:auto 0;">
+              <div class="card-heading">Kabir wants to use WhatsApp — here's what we're asking to do</div>
+              <table class="consent-table">
+                <tr><th>What</th><th>Why</th></tr>
+                <tr>
+                  <td>Messages &amp; basic profile</td>
+                  <td>Core chat functionality</td>
+                </tr>
+                <tr>
+                  <td>Contacts on his phone</td>
+                  <td>To help him find friends already on WhatsApp — paused until you review</td>
+                </tr>
+                <tr>
+                  <td class="denied">❌ Behavioural tracking / ad targeting</td>
+                  <td>Never applied to accounts under 18</td>
+                </tr>
+              </table>
+              <div class="card-buttons">
+                <button class="notnow-btn" disabled title="Decline path not built — happy path only">Not now</button>
+                <button class="approve-btn" onclick="showScreen('s6')">Approve</button>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- S6 -->
         <div class="screen" id="s6" data-label="S6 — [Parent device] Confirmation">
-          <div class="screen-placeholder">
-            <div class="tag">
-              <div class="step-name">S6 — [Parent's phone] Confirmation</div>
-              <div class="step-desc">Content arrives Phase 3.</div>
+          <div style="margin:auto 0; width:100%;">
+            <div class="confirmed-card">
+              <div class="check">✅</div>
+              <div class="confirm-title">You approved Kabir's account</div>
+              <div class="confirm-sub">Approved just now · You can review this anytime in Family Center.</div>
+              <div class="confirm-chip-row">
+                <span class="confirm-chip">Account active</span>
+                <span class="confirm-chip">Contact sync: On</span>
+                <span class="confirm-chip">Ads: Off for under-18</span>
+              </div>
             </div>
           </div>
           <div class="nav-buttons">
-            <button class="secondary" onclick="showScreen('s5')">Back</button>
+            <button class="secondary" disabled>Back</button>
             <button onclick="showScreen('s7')">Back to Kabir's phone</button>
           </div>
         </div>
@@ -630,6 +832,8 @@
     });
   }
 
+  const parentScreens = ['s5', 's6', 's9'];
+
   function showScreen(id) {
     screenIds.forEach(sid => {
       document.getElementById(sid).classList.toggle('active', sid === id);
@@ -637,6 +841,29 @@
     });
     document.getElementById('headerSubtitle').textContent = document.getElementById(id).dataset.label;
     if (id === 's4') resetS4View();
+    if (id === 's5') resetS5View();
+    updateDeviceIndicator(id);
+  }
+
+  function updateDeviceIndicator(id) {
+    const el = document.getElementById('deviceIndicator');
+    const isParent = parentScreens.includes(id);
+    el.textContent = isParent ? "📱 Viewing: Meena's phone (parent)" : "📱 Viewing: Kabir's phone";
+    el.classList.toggle('parent-view', isParent);
+  }
+
+  function resetS5View() {
+    document.getElementById('s5-list').style.display = '';
+    document.getElementById('s5-card').style.display = 'none';
+  }
+
+  function openParentThread() {
+    document.getElementById('s5-list').style.display = 'none';
+    document.getElementById('s5-card').style.display = 'flex';
+  }
+
+  function closeParentThread() {
+    resetS5View();
   }
 
   function updateAgeReadout() {
