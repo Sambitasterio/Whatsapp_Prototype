@@ -45,6 +45,37 @@
     color: #ffffffaa;
     font-size: 13px;
     letter-spacing: 0.02em;
+    text-align: center;
+  }
+
+  /* Prototype Map — jump pill, not part of the "real" product UI */
+  .proto-map {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    background: #ffffff14;
+    border: 1px solid #ffffff26;
+    border-radius: 14px;
+    padding: 8px;
+  }
+
+  .proto-map button {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid #ffffff3a;
+    background: #1a1a1a;
+    color: #cfcfcf;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .proto-map button.active {
+    background: var(--wa-accent-green);
+    color: #04210f;
+    border-color: var(--wa-accent-green);
+    font-weight: 700;
   }
 
   .phone-frame {
@@ -83,43 +114,240 @@
   .wa-body {
     flex: 1;
     overflow-y: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--wa-text-muted);
-    font-size: 14px;
     padding: 24px;
-    text-align: center;
   }
 
-  .placeholder-badge {
+  .screen { display: none; height: 100%; }
+  .screen.active { display: flex; flex-direction: column; }
+
+  .screen-placeholder {
+    margin: auto;
+    text-align: center;
+    color: var(--wa-text-dark);
+  }
+
+  .screen-placeholder .tag {
     display: inline-block;
     background: white;
     border: 1px dashed #c9c9c9;
     border-radius: 12px;
     padding: 16px 20px;
+    max-width: 280px;
+  }
+
+  .screen-placeholder .step-name {
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .screen-placeholder .step-desc {
+    font-size: 13px;
+    color: var(--wa-text-muted);
+  }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 0 0;
+    flex-shrink: 0;
+  }
+
+  .nav-buttons button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: var(--wa-accent-green);
+    color: #04210f;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .nav-buttons button.secondary {
+    background: transparent;
+    color: var(--wa-text-muted);
+    border: 1px solid var(--wa-divider);
+  }
+
+  .nav-buttons button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 </style>
 </head>
 <body>
 
   <div class="stage">
-    <div class="stage-label">Phase 0 — base chrome only, screens arrive in Phase 1</div>
+    <div class="stage-label">Phase 1 — 9-screen skeleton + navigation (placeholder content only; real screen content arrives in Phases 2–4)</div>
+
+    <div class="proto-map" id="protoMap"></div>
+
     <div class="phone-frame">
       <div class="wa-header">
         <div>
           <div class="title">WhatsApp</div>
-          <div class="subtitle">VPC prototype — Kabir's phone</div>
+          <div class="subtitle" id="headerSubtitle">S1 — Birthdate check</div>
         </div>
       </div>
+
       <div class="wa-body">
-        <div class="placeholder-badge">
-          Skeleton loaded correctly.<br />
-          No functional screens yet — Phase 1 adds S1–S9 and navigation.
+        <!-- S1 -->
+        <div class="screen active" id="s1" data-label="S1 — Birthdate check">
+          <div class="screen-placeholder">
+            <div class="tag">
+              <div class="step-name">S1 — Birthdate check</div>
+              <div class="step-desc">Extends WhatsApp's real age-verification prompt. Content arrives Phase 2.</div>
+            </div>
+          </div>
+          <div class="nav-buttons">
+            <button class="secondary" disabled>Back</button>
+            <button onclick="showScreen('s2')">Continue</button>
+          </div>
+        </div>
+
+        <!-- S2 -->
+        <div class="screen" id="s2" data-label="S2 — Parent explainer">
+          <div class="screen-placeholder">
+            <div class="tag">
+              <div class="step-name">S2 — "We're messaging your parent" explainer</div>
+              <div class="step-desc">Content arrives Phase 2.</div>
+            </div>
+          </div>
+          <div class="nav-buttons">
+            <button class="secondary" onclick="showScreen('s1')">Back</button>
+            <button onclick="showScreen('s3')">Continue</button>
+          </div>
+        </div>
+
+        <!-- S3 -->
+        <div class="screen" id="s3" data-label="S3 — Enter parent's number">
+          <div class="screen-placeholder">
+            <div class="tag">
+              <div class="step-name">S3 — Enter parent's WhatsApp number</div>
+              <div class="step-desc">Content arrives Phase 2.</div>
+            </div>
+          </div>
+          <div class="nav-buttons">
+            <button class="secondary" onclick="showScreen('s2')">Back</button>
+            <button onclick="showScreen('s4')">Send request</button>
+          </div>
+        </div>
+
+        <!-- S4 -->
+        <div class="screen" id="s4" data-label="S4 — Minor's chat list (pending)">
+          <div class="screen-placeholder">
+            <div class="tag">
+              <div class="step-name">S4 — Minor's chat list, request pending</div>
+              <div class="step-desc">Content arrives Phase 2. "Simulate: Parent responds" lives here.</div>
+            </div>
+          </div>
+          <div class="nav-buttons">
+            <button class="secondary" onclick="showScreen('s3')">Back</button>
+            <button onclick="showScreen('s5')">Simulate: Parent responds</button>
+          </div>
+        </div>
+
+        <!-- S5 -->
+        <div class="screen" id="s5" data-label="S5 — [Parent device] Consent card">
+          <div class="screen-placeholder">
+            <div class="tag">
+              <div class="step-name">S5 — [Parent's phone] Consent request card</div>
+              <div class="step-desc">Device-switch mechanic + consent card arrive Phase 3.</div>
+            </div>
+          </div>
+          <div class="nav-buttons">
+            <button class="secondary" onclick="showScreen('s4')">Back</button>
+            <button onclick="showScreen('s6')">Approve</button>
+          </div>
+        </div>
+
+        <!-- S6 -->
+        <div class="screen" id="s6" data-label="S6 — [Parent device] Confirmation">
+          <div class="screen-placeholder">
+            <div class="tag">
+              <div class="step-name">S6 — [Parent's phone] Confirmation</div>
+              <div class="step-desc">Content arrives Phase 3.</div>
+            </div>
+          </div>
+          <div class="nav-buttons">
+            <button class="secondary" onclick="showScreen('s5')">Back</button>
+            <button onclick="showScreen('s7')">Back to Kabir's phone</button>
+          </div>
+        </div>
+
+        <!-- S7 -->
+        <div class="screen" id="s7" data-label="S7 — Minor's chat list (resolved)">
+          <div class="screen-placeholder">
+            <div class="tag">
+              <div class="step-name">S7 — Minor's chat list, resolved</div>
+              <div class="step-desc">Content arrives Phase 4.</div>
+            </div>
+          </div>
+          <div class="nav-buttons">
+            <button class="secondary" onclick="showScreen('s6')">Back</button>
+            <button onclick="showScreen('s8')">Continue</button>
+          </div>
+        </div>
+
+        <!-- S8 -->
+        <div class="screen" id="s8" data-label="S8 — Minor's chat list (post-consent)">
+          <div class="screen-placeholder">
+            <div class="tag">
+              <div class="step-name">S8 — Minor's normal chat list, post-consent</div>
+              <div class="step-desc">Content arrives Phase 4.</div>
+            </div>
+          </div>
+          <div class="nav-buttons">
+            <button class="secondary" onclick="showScreen('s7')">Back</button>
+            <button onclick="showScreen('s9')">Parent: Family Center</button>
+          </div>
+        </div>
+
+        <!-- S9 -->
+        <div class="screen" id="s9" data-label="S9 — [Parent device] Family Center">
+          <div class="screen-placeholder">
+            <div class="tag">
+              <div class="step-name">S9 — [Parent's phone] Family Center hub</div>
+              <div class="step-desc">Terminal screen. Content arrives Phase 4.</div>
+            </div>
+          </div>
+          <div class="nav-buttons">
+            <button class="secondary" onclick="showScreen('s8')">Back</button>
+            <button disabled>End of happy path</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+<script>
+  const screenIds = ['s1','s2','s3','s4','s5','s6','s7','s8','s9'];
+
+  function buildProtoMap() {
+    const map = document.getElementById('protoMap');
+    screenIds.forEach((id, i) => {
+      const btn = document.createElement('button');
+      btn.textContent = i + 1;
+      btn.id = 'map-' + id;
+      btn.title = document.getElementById(id).dataset.label;
+      btn.onclick = () => showScreen(id);
+      map.appendChild(btn);
+    });
+  }
+
+  function showScreen(id) {
+    screenIds.forEach(sid => {
+      document.getElementById(sid).classList.toggle('active', sid === id);
+      document.getElementById('map-' + sid).classList.toggle('active', sid === id);
+    });
+    document.getElementById('headerSubtitle').textContent = document.getElementById(id).dataset.label;
+  }
+
+  buildProtoMap();
+  showScreen('s1');
+</script>
 
 </body>
 </html>
