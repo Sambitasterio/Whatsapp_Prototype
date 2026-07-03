@@ -1,0 +1,12 @@
+# Planning docs — reference material, not part of the tracked prototype codebase
+*.md
+docs/
+
+# Assignment brief — personal/confidential, not for the repo
+assignment/
+*.pdf
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/

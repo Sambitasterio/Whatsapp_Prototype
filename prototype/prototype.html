@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WhatsApp VPC Prototype</title>
+<style>
+  :root {
+    --wa-header-dark: #075E54;
+    --wa-header-teal: #128C7E;
+    --wa-accent-green: #25D366;
+    --wa-bubble-out: #D9FDD3;
+    --wa-bubble-in: #FFFFFF;
+    --wa-bg: #ECE5DD;
+    --wa-text-dark: #111B21;
+    --wa-text-muted: #667781;
+    --wa-divider: #E9EDEF;
+    --frame-width: 390px;
+    --frame-height: 780px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #0b141a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+
+  .stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: var(--frame-width);
+  }
+
+  .stage-label {
+    color: #ffffffaa;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+
+  .phone-frame {
+    width: 100%;
+    max-width: var(--frame-width);
+    height: min(var(--frame-height), 85vh);
+    background: var(--wa-bg);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    border: 6px solid #1a1a1a;
+  }
+
+  .wa-header {
+    background: var(--wa-header-dark);
+    color: white;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .wa-header .title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .wa-header .subtitle {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  .wa-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--wa-text-muted);
+    font-size: 14px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .placeholder-badge {
+    display: inline-block;
+    background: white;
+    border: 1px dashed #c9c9c9;
+    border-radius: 12px;
+    padding: 16px 20px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="stage">
+    <div class="stage-label">Phase 0 — base chrome only, screens arrive in Phase 1</div>
+    <div class="phone-frame">
+      <div class="wa-header">
+        <div>
+          <div class="title">WhatsApp</div>
+          <div class="subtitle">VPC prototype — Kabir's phone</div>
+        </div>
+      </div>
+      <div class="wa-body">
+        <div class="placeholder-badge">
+          Skeleton loaded correctly.<br />
+          No functional screens yet — Phase 1 adds S1–S9 and navigation.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
