@@ -30,6 +30,7 @@
     justify-content: center;
     min-height: 100vh;
     padding: 24px;
+    overflow-x: hidden;
   }
 
   .stage {
@@ -42,10 +43,11 @@
   }
 
   .stage-label {
-    color: #ffffffaa;
-    font-size: 13px;
-    letter-spacing: 0.02em;
+    color: #ffffff88;
+    font-size: 11.5px;
+    letter-spacing: 0.03em;
     text-align: center;
+    text-transform: uppercase;
   }
 
   /* Prototype Map — jump pill, not part of the "real" product UI */
@@ -79,6 +81,7 @@
   }
 
   .phone-frame {
+    position: relative;
     width: 100%;
     max-width: var(--frame-width);
     height: min(var(--frame-height), 85vh);
@@ -91,12 +94,25 @@
     border: 6px solid #1a1a1a;
   }
 
+  .phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 22px;
+    background: #1a1a1a;
+    border-radius: 0 0 14px 14px;
+    z-index: 5;
+  }
+
   .wa-header {
     background: var(--wa-header-dark);
     color: white;
-    padding: 14px 16px;
+    padding: 20px 16px 12px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 12px;
     flex-shrink: 0;
   }
@@ -107,8 +123,16 @@
   }
 
   .wa-header .subtitle {
-    font-size: 12px;
-    opacity: 0.8;
+    font-size: 11.5px;
+    opacity: 0.85;
+  }
+
+  .wa-header-icons {
+    display: flex;
+    gap: 16px;
+    font-size: 16px;
+    opacity: 0.9;
+    flex-shrink: 0;
   }
 
   .wa-body {
@@ -689,6 +713,37 @@
   }
 
   .fc-rights-btn:last-child { margin-bottom: 0; }
+
+  .fab-compose {
+    display: none;
+    position: absolute;
+    bottom: 20px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--wa-accent-green);
+    color: #04210f;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    z-index: 4;
+  }
+
+  /* hover/active feedback for clickable elements */
+  .chat-row.clickable:active,
+  .nav-buttons button:not(:disabled):active,
+  .card-buttons button:not(:disabled):active,
+  .demo-shortcut button:active,
+  .fc-review-btn:active,
+  .fc-rights-btn:active {
+    transform: scale(0.98);
+  }
+
+  .nav-buttons button, .card-buttons button, .demo-shortcut button {
+    transition: transform 0.08s ease, opacity 0.15s ease;
+  }
 </style>
 </head>
 <body>
@@ -701,11 +756,13 @@
     <div class="device-indicator" id="deviceIndicator">📱 Viewing: Kabir's phone</div>
 
     <div class="phone-frame">
+      <div class="phone-notch"></div>
       <div class="wa-header">
         <div>
           <div class="title">WhatsApp</div>
           <div class="subtitle" id="headerSubtitle">S1 — Birthdate check</div>
         </div>
+        <div class="wa-header-icons"><span>🔍</span><span>⋮</span></div>
       </div>
 
       <div class="wa-body">
@@ -1005,6 +1062,8 @@
           </div>
         </div>
       </div>
+
+      <div class="fab-compose" id="fabCompose">✎</div>
     </div>
   </div>
 
@@ -1034,6 +1093,16 @@
     if (id === 's4') resetS4View();
     if (id === 's5') resetS5View();
     updateDeviceIndicator(id);
+    refreshFab();
+  }
+
+  function refreshFab() {
+    const fab = document.getElementById('fabCompose');
+    const activeId = screenIds.find(sid => document.getElementById(sid).classList.contains('active'));
+    let show = (activeId === 's7' || activeId === 's8');
+    if (activeId === 's4' && !document.getElementById('s4-list').classList.contains('hidden')) show = true;
+    if (activeId === 's5' && document.getElementById('s5-list').style.display !== 'none') show = true;
+    fab.style.display = show ? 'flex' : 'none';
   }
 
   function updateDeviceIndicator(id) {
@@ -1051,10 +1120,12 @@
   function openParentThread() {
     document.getElementById('s5-list').style.display = 'none';
     document.getElementById('s5-card').style.display = 'flex';
+    refreshFab();
   }
 
   function closeParentThread() {
     resetS5View();
+    refreshFab();
   }
 
   function updateAgeReadout() {
@@ -1080,10 +1151,12 @@
   function openWaThread() {
     document.getElementById('s4-list').classList.add('hidden');
     document.getElementById('s4-thread').classList.add('active');
+    refreshFab();
   }
 
   function closeWaThread() {
     resetS4View();
+    refreshFab();
   }
 
   buildProtoMap();
