@@ -175,6 +175,253 @@
     opacity: 0.4;
     cursor: not-allowed;
   }
+
+  /* ---- Phase 2: S1-S4 real content ---- */
+
+  .card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--wa-text-dark);
+    margin-bottom: 4px;
+  }
+
+  .card-sub {
+    font-size: 13px;
+    color: var(--wa-text-muted);
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .field-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--wa-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .field-input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--wa-divider);
+    background: white;
+    font-size: 14px;
+    color: var(--wa-text-dark);
+    margin-bottom: 16px;
+  }
+
+  .age-readout {
+    font-size: 13px;
+    color: var(--wa-header-teal);
+    font-weight: 600;
+    margin-top: -10px;
+    margin-bottom: 16px;
+    min-height: 18px;
+  }
+
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .bullet-list li {
+    display: flex;
+    gap: 10px;
+    background: white;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    color: var(--wa-text-dark);
+    line-height: 1.4;
+  }
+
+  .bullet-list .emoji {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .contact-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    border: 1px solid var(--wa-divider);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+  }
+
+  .avatar-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .contact-chip .avatar-circle { background: #6b7cff; }
+
+  .contact-name { font-size: 14px; font-weight: 600; color: var(--wa-text-dark); }
+  .contact-number { font-size: 12px; color: var(--wa-text-muted); }
+
+  .hint-text {
+    font-size: 12px;
+    color: var(--wa-text-muted);
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  /* Chat list (S4) */
+  .search-bar {
+    background: white;
+    border-radius: 20px;
+    padding: 9px 14px;
+    font-size: 13px;
+    color: var(--wa-text-muted);
+    margin-bottom: 12px;
+  }
+
+  .chat-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 4px;
+    border-bottom: 1px solid #ffffff00;
+    cursor: default;
+  }
+
+  .chat-row.clickable { cursor: pointer; }
+  .chat-row.clickable:hover { background: #ffffff55; border-radius: 10px; }
+
+  .chat-row .avatar-circle.school { background: #ff9f43; }
+  .chat-row .avatar-circle.friend { background: #10ac84; }
+  .chat-row .avatar-circle.system { background: var(--wa-header-dark); font-size: 16px; }
+
+  .chat-meta { flex: 1; min-width: 0; }
+
+  .chat-name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--wa-text-dark);
+  }
+
+  .verified-badge {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--wa-header-teal);
+    color: white;
+    font-size: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .chat-preview {
+    font-size: 12.5px;
+    color: var(--wa-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .chat-time {
+    font-size: 11px;
+    color: var(--wa-text-muted);
+    flex-shrink: 0;
+    align-self: flex-start;
+  }
+
+  .pinned-row {
+    background: #ffffff8f;
+    border-radius: 10px;
+    margin-bottom: 6px;
+  }
+
+  /* S4 thread detail sub-view */
+  #s4-thread { display: none; flex-direction: column; height: 100%; }
+  #s4-thread.active { display: flex; }
+  #s4-list.hidden { display: none; }
+
+  .thread-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--wa-header-teal);
+    font-weight: 600;
+    margin-bottom: 14px;
+    cursor: pointer;
+  }
+
+  .pending-card {
+    background: white;
+    border-radius: 12px;
+    padding: 14px;
+    margin: auto 0 16px;
+    text-align: left;
+  }
+
+  .pending-card .status-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #b8860b;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .pending-card .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f0a500;
+  }
+
+  .demo-shortcut {
+    border: 1.5px dashed #9aa;
+    background: #f4fff8;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .demo-shortcut .demo-label {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #6b7c76;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .demo-shortcut button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: var(--wa-accent-green);
+    color: #04210f;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+  }
 </style>
 </head>
 <body>
@@ -195,25 +442,29 @@
       <div class="wa-body">
         <!-- S1 -->
         <div class="screen active" id="s1" data-label="S1 — Birthdate check">
-          <div class="screen-placeholder">
-            <div class="tag">
-              <div class="step-name">S1 — Birthdate check</div>
-              <div class="step-desc">Extends WhatsApp's real age-verification prompt. Content arrives Phase 2.</div>
-            </div>
+          <div>
+            <div class="card-title">Confirm your date of birth</div>
+            <div class="card-sub">This helps us keep your account safe and set the right protections for your age.</div>
+            <div class="field-label">Date of birth</div>
+            <input class="field-input" type="date" id="dobInput" value="2011-03-14" onchange="updateAgeReadout()" />
+            <div class="age-readout" id="ageReadout"></div>
           </div>
           <div class="nav-buttons">
             <button class="secondary" disabled>Back</button>
-            <button onclick="showScreen('s2')">Continue</button>
+            <button onclick="updateAgeReadout(); showScreen('s2')">Continue</button>
           </div>
         </div>
 
         <!-- S2 -->
         <div class="screen" id="s2" data-label="S2 — Parent explainer">
-          <div class="screen-placeholder">
-            <div class="tag">
-              <div class="step-name">S2 — "We're messaging your parent" explainer</div>
-              <div class="step-desc">Content arrives Phase 2.</div>
-            </div>
+          <div>
+            <div class="card-title">Almost there</div>
+            <div class="card-sub">Since you're under 18, we need a parent or guardian to confirm a few things.</div>
+            <ul class="bullet-list">
+              <li><span class="emoji">👪</span><span>We'll send your parent a short request — right here on WhatsApp, not a new app.</span></li>
+              <li><span class="emoji">🔒</span><span>Until they respond, things like finding friends through your contacts stay paused.</span></li>
+              <li><span class="emoji">💬</span><span>You can keep chatting with people you already know while you wait.</span></li>
+            </ul>
           </div>
           <div class="nav-buttons">
             <button class="secondary" onclick="showScreen('s1')">Back</button>
@@ -223,11 +474,18 @@
 
         <!-- S3 -->
         <div class="screen" id="s3" data-label="S3 — Enter parent's number">
-          <div class="screen-placeholder">
-            <div class="tag">
-              <div class="step-name">S3 — Enter parent's WhatsApp number</div>
-              <div class="step-desc">Content arrives Phase 2.</div>
+          <div>
+            <div class="card-title">Who's your parent or guardian?</div>
+            <div class="card-sub">Pick a contact or enter their WhatsApp number.</div>
+            <div class="field-label">Sending to</div>
+            <div class="contact-chip">
+              <div class="avatar-circle">M</div>
+              <div>
+                <div class="contact-name">Meena (Mum)</div>
+                <div class="contact-number">+91 98xxxxxx12</div>
+              </div>
             </div>
+            <div class="hint-text">We'll send one message to this number to ask for their okay — it won't create a new chat or contact outside this.</div>
           </div>
           <div class="nav-buttons">
             <button class="secondary" onclick="showScreen('s2')">Back</button>
@@ -237,15 +495,50 @@
 
         <!-- S4 -->
         <div class="screen" id="s4" data-label="S4 — Minor's chat list (pending)">
-          <div class="screen-placeholder">
-            <div class="tag">
-              <div class="step-name">S4 — Minor's chat list, request pending</div>
-              <div class="step-desc">Content arrives Phase 2. "Simulate: Parent responds" lives here.</div>
+          <div id="s4-list">
+            <div class="search-bar">🔍 Search</div>
+
+            <div class="chat-row pinned-row clickable" onclick="openWaThread()">
+              <div class="avatar-circle system">W</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">WhatsApp <span class="verified-badge">✓</span></div>
+                <div class="chat-preview">Consent request sent to Meena (Mum) · Pending</div>
+              </div>
+              <div class="chat-time">now</div>
+            </div>
+
+            <div class="chat-row">
+              <div class="avatar-circle school">10B</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">Class 10B 📚</div>
+                <div class="chat-preview">Ms. Rao: Homework for tomorrow is...</div>
+              </div>
+              <div class="chat-time">9:41</div>
+            </div>
+
+            <div class="chat-row">
+              <div class="avatar-circle friend">A</div>
+              <div class="chat-meta">
+                <div class="chat-name-row">Aryan</div>
+                <div class="chat-preview">See you at practice!</div>
+              </div>
+              <div class="chat-time">Yesterday</div>
             </div>
           </div>
-          <div class="nav-buttons">
-            <button class="secondary" onclick="showScreen('s3')">Back</button>
-            <button onclick="showScreen('s5')">Simulate: Parent responds</button>
+
+          <div id="s4-thread">
+            <div class="thread-back" onclick="closeWaThread()">‹ Back to chats</div>
+            <div class="pending-card">
+              <div class="status-row"><span class="dot"></span>PENDING PARENT RESPONSE</div>
+              <div style="font-size:13.5px; color:var(--wa-text-dark); line-height:1.4;">
+                We messaged <strong>Meena (Mum)</strong> asking her to confirm it's okay for you to use WhatsApp.
+                Your chats keep working normally while you wait.
+              </div>
+            </div>
+            <div class="demo-shortcut">
+              <div class="demo-label">Demo shortcut</div>
+              <button onclick="showScreen('s5')">Simulate: Parent responds</button>
+            </div>
           </div>
         </div>
 
@@ -343,10 +636,41 @@
       document.getElementById('map-' + sid).classList.toggle('active', sid === id);
     });
     document.getElementById('headerSubtitle').textContent = document.getElementById(id).dataset.label;
+    if (id === 's4') resetS4View();
+  }
+
+  function updateAgeReadout() {
+    const dob = new Date(document.getElementById('dobInput').value);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const hasHadBirthdayThisYear = (today.getMonth() > dob.getMonth()) ||
+      (today.getMonth() === dob.getMonth() && today.getDate() >= dob.getDate());
+    if (!hasHadBirthdayThisYear) age--;
+    const readout = document.getElementById('ageReadout');
+    if (age >= 13 && age < 18) {
+      readout.textContent = `Age ${age} — a parent/guardian confirmation is needed`;
+    } else {
+      readout.textContent = `Age ${age}`;
+    }
+  }
+
+  function resetS4View() {
+    document.getElementById('s4-list').classList.remove('hidden');
+    document.getElementById('s4-thread').classList.remove('active');
+  }
+
+  function openWaThread() {
+    document.getElementById('s4-list').classList.add('hidden');
+    document.getElementById('s4-thread').classList.add('active');
+  }
+
+  function closeWaThread() {
+    resetS4View();
   }
 
   buildProtoMap();
   showScreen('s1');
+  updateAgeReadout();
 </script>
 
 </body>
