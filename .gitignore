@@ -1,5 +1,6 @@
 # Planning docs — reference material, not part of the tracked prototype codebase
 *.md
+!README.md
 docs/
 
 # Assignment brief — personal/confidential, not for the repo
