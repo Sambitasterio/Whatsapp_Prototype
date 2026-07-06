@@ -6,6 +6,7 @@ docs/
 # Assignment brief — personal/confidential, not for the repo
 assignment/
 *.pdf
+!WhatsApp DPDP Deck – Sambit Behera.pdf
 
 # OS / editor cruft
 .DS_Store
